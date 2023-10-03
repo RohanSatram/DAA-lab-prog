@@ -1,0 +1,18 @@
+InsertionSort(A):
+    for i = 1 to length(A) - 1 do
+        key = A[i]
+        j = i - 1
+        while j >= 0 and A[j] > key do
+            A[j + 1] = A[j]
+            j = j - 1
+        A[j + 1] = key
+
+Explanation:
+
+1. The for loop iterates over array A from index 1 to the last element (index length (A) - 1).
+2. Inside the for loop there is a variable "key" that stores the current element. This variable key keeps track of which values ​​are inserted in the correct positions.
+3. The variable j is set to an index one less than the index of the current element.
+4. The while loop compares the key with its predecessor and shifts them to the right if they are greater than the key. The loop continues until it reaches the beginning of the array (j = 0) or finds an element below the key.
+5. In the while loop, A[j + 1] = A[j] shifts the element one place to the right. This shift creates space to place the keys in the correct position.
+6. When the while loop finishes, the key is assigned to her A[j+1] and inserted in the correct position.
+7. The outer for loop goes on to the next item and repeats the process until all items are sorted. 

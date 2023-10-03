@@ -1,0 +1,96 @@
+NAME : Syed Mohammad Muzammil Ganihar
+EXECUTED:30/08/2023
+#include <stdio.h>
+#include <limits.h>
+
+#define MAX_CITIES 100
+#define INF INT_MAX
+
+// Structure to represent a road between cities
+struct Road {
+    int from, to, distance;
+};
+
+// Function to find the shortest paths using Bellman-Ford algorithm
+void bellmanFord(int source, int numCities, int numRoads, struct Road roads[], int distances[]) {
+    for (int i = 1; i <= numCities; i++) {
+        distances[i] = INF;
+    }
+    distances[source] = 0;
+
+    for (int i = 1; i <= numCities - 1; i++) {
+        for (int j = 0; j < numRoads; j++) {
+            int u = roads[j].from;
+            int v = roads[j].to;
+            int weight = roads[j].distance;
+            if (distances[u] != INF && distances[u] + weight < distances[v]) {
+                distances[v] = distances[u] + weight;
+            }
+        }
+    }
+}
+
+int main() {
+    int numCities, numRoads, source;
+    printf("Enter the number of cities: ");
+    scanf("%d", &numCities);
+
+    printf("Enter the number of roads: ");
+    scanf("%d", &numRoads);
+
+    struct Road roads[MAX_CITIES];
+    printf("Enter the details of each road:\n");
+    for (int i = 0; i < numRoads; i++) {
+        scanf("%d %d %d", &roads[i].from, &roads[i].to, &roads[i].distance);
+    }
+
+    printf("Enter the source city: ");
+    scanf("%d", &source);
+
+    int distances[MAX_CITIES];
+    bellmanFord(source, numCities, numRoads, roads, distances);
+
+    printf("Shortest distances from city %d to all other cities:\n", source);
+    for (int i = 1; i <= numCities; i++) {
+        printf("City %d: ", i);
+        if (distances[i] == INF) {
+            printf("Not reachable\n");
+        } else {
+            printf("%d\n", distances[i]);
+        }
+    }
+
+    return 0;
+}
+//OUTPUT
+
+Enter the number of cities: 4
+Enter the number of roads: 5
+Enter the details of each road:
+1 2 3
+1 3 6
+2 3 2
+2 4 1
+3 4 5
+Enter the source city: 1
+In this example, we have 4 cities (1, 2, 3, and 4) connected by 5 roads with different distances.
+
+Based on this input, the program would compute the shortest distances from city 1 to all other cities using the Bellman-Ford algorithm and display the results as follows:
+
+Shortest distances from city 1 to all other cities:
+City 1: 0
+City 2: 3
+City 3: 5
+City 4: 4
+Here's what the output means:
+
+The shortest distance from city 1 to itself is 0.
+The shortest distance from city 1 to city 2 is 3.
+The shortest distance from city 1 to city 3 is 5.
+The shortest distance from city 1 to city 4 is 4.
+Each line in the output corresponds to a city, and the value represents the shortest distance from the source city (city 1) to
+tIn this example, you have 4 cities and 5 roads connecting them. The source city is 1. 
+The program uses the Bellman-Ford algorithm to compute the shortest distances from city 1 to all other cities. 
+The output shows the shortest distance from city 1 to each city. City 1 is at a distance of 0 from itself, 
+city 2 is at a distance of 1, city 3 is at a distance of 3, and 
+city 4 is at a distance of 6.hat particular city.
